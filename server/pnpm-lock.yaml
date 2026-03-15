@@ -17,6 +17,12 @@ importers:
       '@graphql-codegen/cli':
         specifier: ^6.2.1
         version: 6.2.1(@types/node@25.2.2)(graphql@16.13.1)(typescript@5.9.3)
+      '@graphql-tools/graphql-file-loader':
+        specifier: ^8.1.12
+        version: 8.1.12(graphql@16.13.1)
+      '@graphql-tools/load':
+        specifier: ^8.1.8
+        version: 8.1.8(graphql@16.13.1)
       '@graphql-tools/schema':
         specifier: ^10.0.31
         version: 10.0.31(graphql@16.13.1)
@@ -47,6 +53,9 @@ importers:
       graphql:
         specifier: ^16.13.1
         version: 16.13.1
+      graphql-import-node:
+        specifier: ^0.0.5
+        version: 0.0.5(graphql@16.13.1)
       jsonwebtoken:
         specifier: ^9.0.3
         version: 9.0.3
@@ -2179,6 +2188,11 @@ packages:
     peerDependenciesMeta:
       cosmiconfig-toml-loader:
         optional: true
+
+  graphql-import-node@0.0.5:
+    resolution: {integrity: sha512-OXbou9fqh9/Lm7vwXT0XoRN9J5+WCYKnbiTalgFDvkQERITRmcfncZs6aVABedd5B85yQU5EULS4a5pnbpuI0Q==}
+    peerDependencies:
+      graphql: '*'
 
   graphql-tag@2.12.6:
     resolution: {integrity: sha512-FdSNcu2QQcWnM2VNvSCCDCVS5PpPqpzgFT8+GXzqJuoDd0CBncxCY278u4mhRO7tMgo2JjgJA5aZ+nWSQ/Z+xg==}
@@ -5975,6 +5989,10 @@ snapshots:
       - crossws
       - typescript
       - utf-8-validate
+
+  graphql-import-node@0.0.5(graphql@16.13.1):
+    dependencies:
+      graphql: 16.13.1
 
   graphql-tag@2.12.6(graphql@16.13.1):
     dependencies:

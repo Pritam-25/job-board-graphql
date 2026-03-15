@@ -1,33 +1,18 @@
-import 'graphql-import-node';
+import { loadSchemaSync } from '@graphql-tools/load';
+import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 
-import {
-  resolvers as userResolvers,
-  typeDefs as userTypeDefs,
-} from '../entities/user/index.js';
-import {
-  resolvers as jobResolvers,
-  typeDefs as jobTypeDefs,
-} from '../entities/job/index.js';
-import {
-  resolvers as companyResolvers,
-  typeDefs as companyTypeDefs,
-} from '../entities/company/index.js';
+import { resolvers as userResolvers } from '../entities/user/index.js';
+import { resolvers as jobResolvers } from '../entities/job/index.js';
+import { resolvers as companyResolvers } from '../entities/company/index.js';
+
+const typeDefs = loadSchemaSync('src/entities/**/*.graphql', {
+  loaders: [new GraphQLFileLoader()],
+});
 
 const schema = makeExecutableSchema({
-  typeDefs: [userTypeDefs, jobTypeDefs, companyTypeDefs],
+  typeDefs: [typeDefs],
   resolvers: [userResolvers, jobResolvers, companyResolvers],
 });
 
 export default schema;
-
-export const typeDefs = `#graphql
-  type Book {
-    title: String
-    author: String
-  }
-
-  type Query {
-    books: [Book]
-  }
-`;

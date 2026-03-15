@@ -25,7 +25,7 @@ const apolloServer = new ApolloServer({
 await apolloServer.start();
 
 // attach authentication to populate `req.user` before GraphQL context is created
-app.use(authenticate as any);
+app.use(authenticate);
 
 app.use(
   '/graphql',
@@ -37,7 +37,7 @@ app.use(
 /* ---------- REST Routes ---------- */
 
 app.get('/', (_req: Request, res: Response) => {
-  res.send('👋 Hello from HireSense');
+  res.send('👋 Welcome from Job board api');
 });
 
 app.get('/api/health', async (_req, res) => {
