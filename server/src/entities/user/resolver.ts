@@ -45,16 +45,11 @@ const resolvers: Resolvers = {
 
       const hashedPassword = await hashPassword(password);
 
-      const newUser = await createUser(context.prisma, {
+      return await createUser(context.prisma, {
         email,
         name,
         password: hashedPassword,
       });
-
-      return {
-        ...newUser,
-        role: newUser.role as UserRole,
-      };
     },
     login: async (_root, args, context) => {
       const { email, password } = args.input;
@@ -74,10 +69,7 @@ const resolvers: Resolvers = {
         isAdmin: user.role === UserRole.Admin,
       });
 
-      return {
-        ...user,
-        role: user.role as UserRole,
-      };
+      return user;
     },
     logout: async (_root, _args, context) => {
       logoutUser(context.res);

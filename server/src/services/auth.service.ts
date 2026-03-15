@@ -7,6 +7,7 @@ export function loginUser(
 ) {
   const token = signToken({ id: user.id, isAdmin: Boolean(user.isAdmin) });
   res.cookie('token', token, { httpOnly: true, sameSite: 'lax' });
+  return token;
 }
 
 export function logoutUser(res: Response) {

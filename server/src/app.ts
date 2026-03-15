@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express, { Request, Response } from 'express';
 import type { Application } from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import { ApolloServer } from '@apollo/server';
 
 import { expressMiddleware } from '@as-integrations/express5';
@@ -10,10 +11,17 @@ import { prisma } from './lib/prisma.js';
 import schema from './graphql/schema.js';
 import createContext from './graphql/context.js';
 import { authenticate } from './middleware/auth.middleware.js';
+import { env } from '@utils/env.js';
 
 const app: Application = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: env.CLIENT_ORIGIN,
+    credentials: true,
+  })
+);
+app.use(cookieParser());
 app.use(express.json());
 
 /* ---------- Apollo Server ---------- */
