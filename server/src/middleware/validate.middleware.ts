@@ -28,7 +28,7 @@ export const validateSchema =
       console.log('Errors before response:', errors);
       return res
         .status(statusCode.badRequest)
-        .json(errorResponse(ERROR_CODES.VALIDATION_ERROR, errors));
+        .json(errorResponse(ERROR_CODES.INVALID_INPUT, errors));
     }
 
     // overwrite with validated data

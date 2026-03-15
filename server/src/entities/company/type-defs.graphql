@@ -1,6 +1,9 @@
 type Company {
-  id: Int!
+  id: String!
   name: String!
+  jobs: [Job!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 extend type Query {

@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 
 export const authenticate = (
   req: Request,
-  res: Response,
+  _res: Response,
   next: NextFunction
 ) => {
   const token = req.cookies?.token;

@@ -12,8 +12,14 @@ datasource db {
   provider = "postgresql"
 }
 
+enum JobType {
+  FULL_TIME
+  PART_TIME
+  INTERNSHIP
+}
+
 model Company {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   name      String
   jobs      Job[]
   createdAt DateTime @default(now())
@@ -21,26 +27,31 @@ model Company {
 }
 
 model Job {
-  id          Int    @id @default(autoincrement())
+  id          String  @id @default(ulid())
   title       String
-  description String
   location    String
+  description String
+  type        JobType
+  remote      Boolean
+  salary      Int
 
   company   Company @relation(fields: [companyId], references: [id])
-  companyId Int
+  companyId String
 
-  createdBy   User @relation(fields: [createdById], references: [id])
-  createdById Int
+  owner      User   @relation("JobOwner", fields: [ownerId], references: [id])
+  ownerId    String
+  applicants User[] @relation("JobApplicants")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(uuid())
   email       String   @unique
   name        String?
-  appliedJobs Job[]
+  jobsOwned   Job[]    @relation("JobOwner")
+  appliedJobs Job[]    @relation("JobApplicants")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
