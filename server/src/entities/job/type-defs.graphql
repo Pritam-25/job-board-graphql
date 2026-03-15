@@ -21,6 +21,43 @@ type Job {
   updatedAt: DateTime!
 }
 
+input SerchJobsInput {
+  query: String!
+}
+
+type Query {
+  searchJobs(input: SerchJobsInput!): [Job!]!
+}
+
+input CreateJobInput {
+  title: String!
+  description: String!
+  location: String!
+  companyId: String!
+  type: JobType!
+  remote: Boolean!
+  salary: Int!
+}
+
+input DeleteJobInput {
+  jobId: String!
+}
+
+input ApplyToJobInput {
+  jobId: String!
+}
+
+input CancelApplicationInput {
+  jobId: String!
+}
+
+type Mutation {
+  createJob(input: CreateJobInput!): Job!
+  deleteJob(input: DeleteJobInput!): Boolean!
+  applyToJob(input: ApplyToJobInput!): Boolean!
+  cancelApplication(input: CancelApplicationInput!): Boolean!
+}
+
 extend type Query {
   jobs: [Job!]
 }

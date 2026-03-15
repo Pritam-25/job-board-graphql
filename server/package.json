@@ -20,7 +20,7 @@
     "type-check": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "codegen": "graphql-codegen --config lib/codegen.ts"
+    "codegen": "graphql-codegen --config src/lib/codegen.ts"
   },
   "keywords": [],
   "author": "",

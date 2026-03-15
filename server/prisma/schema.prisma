@@ -18,6 +18,11 @@ enum JobType {
   INTERNSHIP
 }
 
+enum UserRole {
+  USER
+  ADMIN
+}
+
 model Company {
   id        String   @id @default(uuid())
   name      String
@@ -50,6 +55,7 @@ model User {
   id          String   @id @default(uuid())
   email       String   @unique
   name        String?
+  role        UserRole @default(USER)
   jobsOwned   Job[]    @relation("JobOwner")
   appliedJobs Job[]    @relation("JobApplicants")
   createdAt   DateTime @default(now())
