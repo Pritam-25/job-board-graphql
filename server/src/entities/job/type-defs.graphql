@@ -21,12 +21,12 @@ type Job {
   updatedAt: DateTime!
 }
 
-input SerchJobsInput {
+input SearchJobsInput {
   query: String!
 }
 
 type Query {
-  searchJobs(input: SerchJobsInput!): [Job!]!
+  searchJobs(input: SearchJobsInput!): [Job!]!
 }
 
 input CreateJobInput {
@@ -40,15 +40,15 @@ input CreateJobInput {
 }
 
 input DeleteJobInput {
-  jobId: String!
+  id: String!
 }
 
 input ApplyToJobInput {
-  jobId: String!
+  id: String!
 }
 
 input CancelApplicationInput {
-  jobId: String!
+  id: String!
 }
 
 type Mutation {

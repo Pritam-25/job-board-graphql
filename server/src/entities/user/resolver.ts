@@ -7,29 +7,30 @@ import {
 } from '@repositories/user.repository.js';
 import { hashPassword, verifyPassword } from '@utils/password.js';
 import { loginUser, logoutUser } from '@services/auth.service.js';
+import { appliedJJobs, ownedJobs } from '@repositories/job.repository.js';
 
 const resolvers: Resolvers = {
+  User: {
+    appliedJobs: async (user, _args, context) => {
+      return await appliedJJobs(context.prisma, user.id);
+    },
+    jobsOwned: async (user, _args, context) => {
+      if (!context.user?.isAdmin) {
+        throw new Error('Unauthorized');
+      }
+
+      return await ownedJobs(context.prisma, user.id);
+    },
+  },
   Query: {
     me: async (_root, _args, context) => {
       if (!context.user) return null;
 
-      const user = await findUserById(context.prisma, context.user.id);
-
-      if (!user) return null;
-
-      return {
-        ...user,
-        role: user.role as UserRole,
-      };
+      return await findUserById(context.prisma, context.user.id);
     },
 
     users: async (_root, _args, context) => {
-      const users = await findAllUsers(context.prisma);
-
-      return users.map(user => ({
-        ...user,
-        role: user.role as UserRole,
-      }));
+      return await findAllUsers(context.prisma);
     },
   },
   Mutation: {

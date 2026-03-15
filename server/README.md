@@ -7,24 +7,24 @@ The project demonstrates a clean backend architecture using GraphQL with modular
 
 ## Features
 
-* GraphQL API
-* TypeScript support
-* Prisma ORM for database access
-* Modular entity-based structure
-* Authentication with hashed passwords
-* Clean separation of concerns (resolvers, repositories, services)
+- GraphQL API
+- TypeScript support
+- Prisma ORM for database access
+- Modular entity-based structure
+- Authentication with hashed passwords
+- Clean separation of concerns (resolvers, repositories, services)
 
 ---
 
 ## Tech Stack
 
-* Node.js
-* TypeScript
-* Express
-* GraphQL
-* Prisma
-* PostgreSQL
-* bcrypt (for password hashing)
+- Node.js
+- TypeScript
+- Express
+- GraphQL
+- Prisma
+- PostgreSQL
+- bcrypt (for password hashing)
 
 ---
 
@@ -146,10 +146,10 @@ query {
 
 ## Future Improvements
 
-* Role-based authorization
-* DataLoader to prevent N+1 queries
-* GraphQL subscriptions
-* Improved authentication and refresh tokens
+- Role-based authorization
+- DataLoader to prevent N+1 queries
+- GraphQL subscriptions
+- Improved authentication and refresh tokens
 
 ---
 
