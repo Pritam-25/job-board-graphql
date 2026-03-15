@@ -4,11 +4,12 @@ import type { Application } from 'express';
 import cors from 'cors';
 import { ApolloServer } from '@apollo/server';
 
-import { typeDefs } from './graphql/schema.js';
-import { resolvers } from './graphql/resolvers.js';
 import { expressMiddleware } from '@as-integrations/express5';
 import { statusCode } from '@utils/statusCodes.js';
 import { prisma } from './lib/prisma.js';
+import schema from './graphql/schema.js';
+import createContext from './graphql/context.js';
+import { authenticate } from './middleware/auth.middleware.js';
 
 const app: Application = express();
 
@@ -18,13 +19,20 @@ app.use(express.json());
 /* ---------- Apollo Server ---------- */
 
 const apolloServer = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema,
 });
 
 await apolloServer.start();
 
-app.use('/graphql', expressMiddleware(apolloServer));
+// attach authentication to populate `req.user` before GraphQL context is created
+app.use(authenticate as any);
+
+app.use(
+  '/graphql',
+  expressMiddleware(apolloServer, {
+    context: async ({ req, res }) => createContext({ req, res }),
+  })
+);
 
 /* ---------- REST Routes ---------- */
 

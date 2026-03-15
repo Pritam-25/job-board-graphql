@@ -1,0 +1,8 @@
+type Job {
+  id: Int!
+  title: String!
+}
+
+extend type Query {
+  jobs: [Job!]
+}
