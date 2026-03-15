@@ -34,6 +34,7 @@ type Mutation {
   logout: Boolean!
 }
 
-extend type Query {
+type Query {
+  me: User
   users: [User!]
 }

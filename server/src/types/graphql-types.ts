@@ -136,6 +136,7 @@ export type Query = {
   __typename?: 'Query';
   companies?: Maybe<Array<Company>>;
   jobs?: Maybe<Array<Job>>;
+  me?: Maybe<User>;
   searchJobs: Array<Job>;
   users?: Maybe<Array<User>>;
 };
@@ -425,6 +426,7 @@ export type QueryResolvers<
     ContextType
   >;
   jobs?: Resolver<Maybe<Array<ResolversTypes['Job']>>, ParentType, ContextType>;
+  me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   searchJobs?: Resolver<
     Array<ResolversTypes['Job']>,
     ParentType,

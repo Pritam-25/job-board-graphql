@@ -29,6 +29,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@graphql-codegen/typescript-resolvers": "^5.1.7",
+    "@types/bcrypt": "^6.0.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
@@ -58,6 +59,7 @@
     "@prisma/adapter-pg": "^7.5.0",
     "@prisma/client": "^7.5.0",
     "@t3-oss/env-core": "^0.13.10",
+    "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^17.2.4",
