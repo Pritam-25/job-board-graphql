@@ -3,6 +3,11 @@ import {
   GraphQLScalarType,
   GraphQLScalarTypeConfig,
 } from 'graphql';
+import {
+  Job as JobModel,
+  Company as CompanyModel,
+  User as UserModel,
+} from '@generated/prisma/client.js';
 import { Context } from '../graphql/context.js';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -38,11 +43,11 @@ export type Scalars = {
 };
 
 export type ApplyToJobInput = {
-  jobId: Scalars['String']['input'];
+  id: Scalars['String']['input'];
 };
 
 export type CancelApplicationInput = {
-  jobId: Scalars['String']['input'];
+  id: Scalars['String']['input'];
 };
 
 export type Company = {
@@ -65,7 +70,7 @@ export type CreateJobInput = {
 };
 
 export type DeleteJobInput = {
-  jobId: Scalars['String']['input'];
+  id: Scalars['String']['input'];
 };
 
 export type Job = {
@@ -142,10 +147,10 @@ export type Query = {
 };
 
 export type QuerySearchJobsArgs = {
-  input: SerchJobsInput;
+  input: SearchJobsInput;
 };
 
-export type SerchJobsInput = {
+export type SearchJobsInput = {
   query: Scalars['String']['input'];
 };
 
@@ -295,20 +300,20 @@ export type ResolversTypes = {
   ApplyToJobInput: ResolverTypeWrapper<Partial<ApplyToJobInput>>;
   Boolean: ResolverTypeWrapper<Partial<Scalars['Boolean']['output']>>;
   CancelApplicationInput: ResolverTypeWrapper<Partial<CancelApplicationInput>>;
-  Company: ResolverTypeWrapper<Partial<Company>>;
+  Company: ResolverTypeWrapper<CompanyModel>;
   CreateJobInput: ResolverTypeWrapper<Partial<CreateJobInput>>;
   DateTime: ResolverTypeWrapper<Partial<Scalars['DateTime']['output']>>;
   DeleteJobInput: ResolverTypeWrapper<Partial<DeleteJobInput>>;
   Int: ResolverTypeWrapper<Partial<Scalars['Int']['output']>>;
-  Job: ResolverTypeWrapper<Partial<Job>>;
+  Job: ResolverTypeWrapper<JobModel>;
   JobType: ResolverTypeWrapper<Partial<JobType>>;
   LoginInput: ResolverTypeWrapper<Partial<LoginInput>>;
   Mutation: ResolverTypeWrapper<Record<PropertyKey, never>>;
   Query: ResolverTypeWrapper<Record<PropertyKey, never>>;
-  SerchJobsInput: ResolverTypeWrapper<Partial<SerchJobsInput>>;
+  SearchJobsInput: ResolverTypeWrapper<Partial<SearchJobsInput>>;
   SignupInput: ResolverTypeWrapper<Partial<SignupInput>>;
   String: ResolverTypeWrapper<Partial<Scalars['String']['output']>>;
-  User: ResolverTypeWrapper<Partial<User>>;
+  User: ResolverTypeWrapper<UserModel>;
   UserRole: ResolverTypeWrapper<Partial<UserRole>>;
 };
 
@@ -317,19 +322,19 @@ export type ResolversParentTypes = {
   ApplyToJobInput: Partial<ApplyToJobInput>;
   Boolean: Partial<Scalars['Boolean']['output']>;
   CancelApplicationInput: Partial<CancelApplicationInput>;
-  Company: Partial<Company>;
+  Company: CompanyModel;
   CreateJobInput: Partial<CreateJobInput>;
   DateTime: Partial<Scalars['DateTime']['output']>;
   DeleteJobInput: Partial<DeleteJobInput>;
   Int: Partial<Scalars['Int']['output']>;
-  Job: Partial<Job>;
+  Job: JobModel;
   LoginInput: Partial<LoginInput>;
   Mutation: Record<PropertyKey, never>;
   Query: Record<PropertyKey, never>;
-  SerchJobsInput: Partial<SerchJobsInput>;
+  SearchJobsInput: Partial<SearchJobsInput>;
   SignupInput: Partial<SignupInput>;
   String: Partial<Scalars['String']['output']>;
-  User: Partial<User>;
+  User: UserModel;
 };
 
 export type CompanyResolvers<
