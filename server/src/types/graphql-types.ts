@@ -60,7 +60,7 @@ export type Company = {
 };
 
 export type CreateJobInput = {
-  companyId: Scalars['String']['input'];
+  companyName: Scalars['String']['input'];
   description: Scalars['String']['input'];
   location: Scalars['String']['input'];
   remote: Scalars['Boolean']['input'];
@@ -111,6 +111,7 @@ export type Mutation = {
   login: User;
   logout: Scalars['Boolean']['output'];
   signup: User;
+  updateJob: Job;
 };
 
 export type MutationApplyToJobArgs = {
@@ -137,6 +138,10 @@ export type MutationSignupArgs = {
   input: SignupInput;
 };
 
+export type MutationUpdateJobArgs = {
+  input: UpdateJobInput;
+};
+
 export type Query = {
   __typename?: 'Query';
   companies?: Maybe<Array<Company>>;
@@ -159,6 +164,17 @@ export type SignupInput = {
   name: Scalars['String']['input'];
   password: Scalars['String']['input'];
   role?: InputMaybe<UserRole>;
+};
+
+export type UpdateJobInput = {
+  companyName?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['String']['input'];
+  location?: InputMaybe<Scalars['String']['input']>;
+  remote?: InputMaybe<Scalars['Boolean']['input']>;
+  salary?: InputMaybe<Scalars['Int']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<JobType>;
 };
 
 export type User = {
@@ -313,6 +329,7 @@ export type ResolversTypes = {
   SearchJobsInput: ResolverTypeWrapper<Partial<SearchJobsInput>>;
   SignupInput: ResolverTypeWrapper<Partial<SignupInput>>;
   String: ResolverTypeWrapper<Partial<Scalars['String']['output']>>;
+  UpdateJobInput: ResolverTypeWrapper<Partial<UpdateJobInput>>;
   User: ResolverTypeWrapper<UserModel>;
   UserRole: ResolverTypeWrapper<Partial<UserRole>>;
 };
@@ -334,6 +351,7 @@ export type ResolversParentTypes = {
   SearchJobsInput: Partial<SearchJobsInput>;
   SignupInput: Partial<SignupInput>;
   String: Partial<Scalars['String']['output']>;
+  UpdateJobInput: Partial<UpdateJobInput>;
   User: UserModel;
 };
 
@@ -417,6 +435,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationSignupArgs, 'input'>
+  >;
+  updateJob?: Resolver<
+    ResolversTypes['Job'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdateJobArgs, 'input'>
   >;
 };
 

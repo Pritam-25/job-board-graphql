@@ -25,7 +25,7 @@ enum UserRole {
 
 model Company {
   id        String   @id @default(uuid())
-  name      String
+  name      String   @unique
   jobs      Job[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

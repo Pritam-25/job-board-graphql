@@ -1,22 +1,20 @@
-import { Resolvers, UserRole } from 'src/types/graphql-types.js';
-import {
-  createUser,
-  findAllUsers,
-  findUserByEmail,
-  findUserById,
-} from '@repositories/user.repository.js';
-import { hashPassword, verifyPassword } from '@utils/password.js';
-import { loginUser, logoutUser } from '@services/auth.service.js';
-import { appliedJJobs, ownedJobs } from '@repositories/job.repository.js';
+import { Resolvers } from 'src/types/graphql-types.js';
+import { findAllUsers, findUserById } from '@repositories/user.repository.js';
+import { loginService, logoutUser, signupService } from '@services/index.js';
+import { appliedJobs, ownedJobs } from '@repositories/index.js';
+import { GraphQLError } from 'graphql';
+import { ERRORS } from '@utils/errorCodes.js';
 
 const resolvers: Resolvers = {
   User: {
     appliedJobs: async (user, _args, context) => {
-      return await appliedJJobs(context.prisma, user.id);
+      return await appliedJobs(context.prisma, user.id);
     },
     jobsOwned: async (user, _args, context) => {
       if (!context.user?.isAdmin) {
-        throw new Error('Unauthorized');
+        throw new GraphQLError(ERRORS.FORBIDDEN.message, {
+          extensions: { code: ERRORS.FORBIDDEN.code },
+        });
       }
 
       return await ownedJobs(context.prisma, user.id);
@@ -35,41 +33,10 @@ const resolvers: Resolvers = {
   },
   Mutation: {
     signup: async (_root, args, context) => {
-      const { email, name, password } = args.input;
-
-      const existingUser = await findUserByEmail(context.prisma, email);
-
-      if (existingUser) {
-        throw new Error('Email already exists');
-      }
-
-      const hashedPassword = await hashPassword(password);
-
-      return await createUser(context.prisma, {
-        email,
-        name,
-        password: hashedPassword,
-      });
+      return signupService(context, args.input);
     },
     login: async (_root, args, context) => {
-      const { email, password } = args.input;
-
-      const user = await findUserByEmail(context.prisma, email);
-      if (!user) {
-        throw new Error('Invalid email or password');
-      }
-
-      const isValidPassword = await verifyPassword(password, user.password);
-      if (!isValidPassword) {
-        throw new Error('Invalid email or password');
-      }
-
-      loginUser(context.res, {
-        id: user.id,
-        isAdmin: user.role === UserRole.Admin,
-      });
-
-      return user;
+      return loginService(context, args.input);
     },
     logout: async (_root, _args, context) => {
       logoutUser(context.res);

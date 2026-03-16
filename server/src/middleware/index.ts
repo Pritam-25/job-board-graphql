@@ -1,4 +1,1 @@
-import { errorHandler } from './error.middleware.js';
-import { validateSchema } from './validate.middleware.js';
-
-export { errorHandler, validateSchema };
+export * from './auth.middleware.js';

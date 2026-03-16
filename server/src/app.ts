@@ -4,14 +4,13 @@ import type { Application } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { ApolloServer } from '@apollo/server';
-
-import { expressMiddleware } from '@as-integrations/express5';
 import { statusCode } from '@utils/statusCodes.js';
-import { prisma } from './lib/prisma.js';
-import schema from './graphql/schema.js';
-import createContext from './graphql/context.js';
-import { authenticate } from './middleware/auth.middleware.js';
-import { env } from '@utils/env.js';
+import { expressMiddleware } from '@as-integrations/express5';
+import { prisma } from '@lib/prisma.js';
+import schema from '@graphql/schema.js';
+import createContext from '@graphql/context.js';
+import { authenticate } from '@middleware/index.js';
+import { env } from '@lib/env.js';
 
 const app: Application = express();
 

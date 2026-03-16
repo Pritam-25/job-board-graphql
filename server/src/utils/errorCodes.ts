@@ -1,6 +1,10 @@
-const ERROR_CODES = {
-  INTERNAL_ERROR: 'Internal Server Error',
-  INVALID_INPUT: 'Invalid JSON body',
+export const ERRORS = {
+  UNAUTHENTICATED: {
+    code: 'UNAUTHENTICATED',
+    message: 'Authentication required',
+  },
+  FORBIDDEN: {
+    code: 'FORBIDDEN',
+    message: 'Admin access required',
+  },
 } as const;
-
-export { ERROR_CODES };

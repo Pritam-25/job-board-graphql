@@ -33,10 +33,21 @@ input CreateJobInput {
   title: String!
   description: String!
   location: String!
-  companyId: String!
+  companyName: String!
   type: JobType!
   remote: Boolean!
   salary: Int!
+}
+
+input UpdateJobInput {
+  id: String!
+  title: String
+  description: String
+  location: String
+  companyName: String
+  type: JobType
+  remote: Boolean
+  salary: Int
 }
 
 input DeleteJobInput {
@@ -53,6 +64,7 @@ input CancelApplicationInput {
 
 type Mutation {
   createJob(input: CreateJobInput!): Job!
+  updateJob(input: UpdateJobInput!): Job!
   deleteJob(input: DeleteJobInput!): Boolean!
   applyToJob(input: ApplyToJobInput!): Boolean!
   cancelApplication(input: CancelApplicationInput!): Boolean!

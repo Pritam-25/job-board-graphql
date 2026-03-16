@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { prisma } from 'src/lib/prisma.js';
+import { prisma } from '@lib/prisma.js';
 
 export interface AuthUser {
   id: string;
